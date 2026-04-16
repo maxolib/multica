@@ -12,6 +12,7 @@ import { Button } from "@multica/ui/components/ui/button";
 import { Input } from "@multica/ui/components/ui/input";
 import { Label } from "@multica/ui/components/ui/label";
 import { toast } from "sonner";
+import { createSafeId } from "@multica/core/utils";
 
 interface ArgEntry {
   id: string;
@@ -19,7 +20,7 @@ interface ArgEntry {
 }
 
 function argsToEntries(args: string[]): ArgEntry[] {
-  return args.map((value) => ({ id: crypto.randomUUID(), value }));
+  return args.map((value) => ({ id: createSafeId(), value }));
 }
 
 function entriesToArgs(entries: ArgEntry[]): string[] {
@@ -43,7 +44,7 @@ export function CustomArgsTab({
   const dirty = JSON.stringify(currentArgs) !== JSON.stringify(originalArgs);
 
   const addEntry = () => {
-    setEntries([...entries, { id: crypto.randomUUID(), value: "" }]);
+    setEntries([...entries, { id: createSafeId(), value: "" }]);
   };
 
   const removeEntry = (index: number) => {
